@@ -1,0 +1,227 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.djy.secondmarket.Fragment.SortFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/blue">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Sort"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:id="@+id/ll_digital"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/background3"
+            android:layout_margin="1dp">
+
+            <Button
+                android:id="@+id/button_digital"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/digital"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="45dp" />
+
+            <TextView
+                android:id="@+id/text_digital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Digital products"
+                android:textSize="18sp"
+                android:layout_marginBottom="40dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_electrical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@color/background2"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_electrical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/electrical" />
+
+            <TextView
+                android:id="@+id/text_electrical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                android:text="Electrical equipment"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/ll_daily"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/background1"
+            android:layout_margin="1dp">
+
+            <Button
+                android:id="@+id/button_daily"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/daily" />
+
+            <TextView
+                android:id="@+id/text_daily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Daily supplies"
+                android:textSize="18sp"
+                android:layout_marginBottom="40dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_books"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/background3"
+            android:orientation="vertical"
+            android:layout_margin="1dp">
+
+            <Button
+                android:id="@+id/button_books"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/books" />
+
+            <TextView
+                android:id="@+id/text_books"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                android:text="Books"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/ll_clothes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/background2"
+            android:layout_margin="1dp">
+
+            <Button
+                android:id="@+id/button_clothes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/clothes"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="45dp"
+                />
+
+            <TextView
+                android:id="@+id/text_clothes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Clothes"
+                android:textSize="18sp"
+                android:layout_marginBottom="40dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_sports"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/background1"
+            android:orientation="vertical"
+            android:layout_margin="1dp">
+
+            <Button
+                android:id="@+id/button_sports"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/sports" />
+
+            <TextView
+                android:id="@+id/text_sports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                android:text="Sporting goods"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
