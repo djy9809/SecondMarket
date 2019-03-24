@@ -8,10 +8,21 @@ import java.util.Arrays;
  */
 
 public class UserBO implements Serializable {
+    private String opType;
     private String uid;
     private String uname;
     private String upassword;
     private byte[] uimage;
+    private String uphone;
+
+
+    public String getOpType() {
+        return opType;
+    }
+
+    public void setOpType(String opType) {
+        this.opType = opType;
+    }
 
     public String getUid() {
         return uid;
@@ -45,13 +56,23 @@ public class UserBO implements Serializable {
         this.uimage = uimage;
     }
 
+    public String getUphone() {
+        return uphone;
+    }
+
+    public void setUphone(String uphone) {
+        this.uphone = uphone;
+    }
+
     @Override
     public String toString() {
         return "UserBO{" +
-                "uid='" + uid + '\'' +
+                "opType='" + opType + '\'' +
+                ", uid='" + uid + '\'' +
                 ", uname='" + uname + '\'' +
                 ", upassword='" + upassword + '\'' +
                 ", uimage=" + Arrays.toString(uimage) +
+                ", uphone='" + uphone + '\'' +
                 '}';
     }
 }

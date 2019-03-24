@@ -59,6 +59,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="20dp"></View>
                 <EditText
+                    android:id="@+id/Edit_username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="请输入用户名"
@@ -66,7 +67,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <View
@@ -76,29 +77,31 @@
                     android:layout_gravity="center"
                     android:layout_margin="20dp"></View>
                 <EditText
+                    android:id="@+id/Edit_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="请输入密码"
+                    android:inputType="textPassword"
                     android:textSize="15sp"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/password_re"
-                    android:layout_gravity="center"
-                    android:layout_margin="20dp"></View>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="请再次输入密码"
-                    android:textSize="15sp"/>
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp">-->
+                <!--<View-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@drawable/password_re"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_margin="20dp"></View>-->
+                <!--<EditText-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:hint="请再次输入密码"-->
+                    <!--android:textSize="15sp"/>-->
+            <!--</LinearLayout>-->
             <Button
-                android:id="@+id/b_register2"
+                android:id="@+id/btn_register"
                 android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

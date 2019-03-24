@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,19 +14,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.load.engine.Resource;
+import com.example.djy.secondmarket.Fragment.Me.mode.RegisterBO;
 import com.example.djy.secondmarket.Fragment.Me.mode.UserBO;
 import com.example.djy.secondmarket.Fragment.MeFragment;
 import com.example.djy.secondmarket.MainActivity;
 import com.example.djy.secondmarket.R;
 import com.google.gson.Gson;
-import com.squareup.okhttp.OkHttpClient;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.UUID;
 
-public class Login extends AppCompatActivity {
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+public class Login extends AppCompatActivity{
     private EditText et_uname,et_password;
     private Button btn_login;
 
@@ -37,6 +49,7 @@ public class Login extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
+        //点击注册、忘记密码、界面跳转
         Button b_register = (Button) findViewById(R.id.btn_register);
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +67,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //绑定布局
         et_uname = (EditText)findViewById(R.id.et_uname);
         et_password = (EditText)findViewById(R.id.et_password);
         btn_login = (Button)findViewById(R.id.btn_login);
@@ -61,47 +75,67 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uname = et_uname.getText().toString().trim();//.getText()获取文本，.toString()转成string类型,.trim()去掉前后空白
-                String upassword = et_password.getText().toString().trim();
-
-                Log.i("Test","unamer is:"+uname);
-                Log.i("Test","upassword is:"+upassword);
-
-                Resources res = getResources();
-                Bitmap bmp = BitmapFactory.decodeResource(res,R.drawable.ding);//从drawable中取一个图片（以后大家需要从相册中取，或者相机中取）。
-                //读取一个资源文件得到一个位图。如果位图数据不能被解码，或者opts参数只请求大小信息时，则返回NuLL。
-                //（即当Options.inJustDecodeBounds=true,只请求图片的大小信息。）-->public static Bitmap decodeResource(Resources res, int id)
-                byte[] uimages = Bitmap2Bytes(bmp);
-
-                register( uname ,upassword.toString() , uimages );
+                sendPostHttpRequest();
             }
         });
 
     }
 
-    private void register(String uname,String upassword,byte[] uimages){
+    private void sendPostHttpRequest() {
 
-        UserBO userBO = new UserBO();
-        String uuid = UUID.randomUUID().toString();
-        userBO.setUid(uuid);
-        userBO.setUname(uname);
-        userBO.setUpassword(upassword);
-        userBO.setUimage(uimages);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                String url ="http://192.168.2.114:8081/Proj20/login";
+                UserBO user = new UserBO();
+                String uname = et_uname.getText().toString().trim();//.getText()获取文本，.toString()转成string类型,.trim()去掉前后空白
+                String upassword = et_password.getText().toString().trim();
+                user.setOpType("90002");
+                user.setUname(uname);
+                user.setUpassword(upassword);
+                Gson gson = new Gson();
+                String jsonStr = gson.toJson(user,UserBO.class);
 
-        Gson gson = new Gson();
-        String userJsonStr = gson.toJson(userBO,UserBO.class);
-        Log.i("Test","jsonStr is :"+userJsonStr);
+                RequestBody requestBody = new FormBody.Builder()
+                        .add("reqJson",jsonStr)
+                        .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(requestBody)
+                        .build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.i("test", "获取数据失败" + e.toString());
+                    }
 
-        String url = "http://192.168.0.184:8081/Proj13/login";
-        sendRequest(url, userJsonStr);//（发给谁？，发什么？）
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()){
+                            final String s = response.body().string();
+                            Log.i("test", "response.body().string()==" + s);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Login.this,s,Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            Gson gson = new Gson();
+                            RegisterBO bo = new RegisterBO();
+                            Log.i("test", "RegisterBO is :" + bo.toString());
+                            bo.getFlag();
+                            bo.getMessage();
+                            bo.getToken();
+                        }
+                    }
+                });
+            }
+        }).start();
+
     }
 
-    public void sendRequest(String url,String jsonStr){
-
-        OkHttpClient client = new OkHttpClient();
-
-
-    }
 
     @Override
     public boolean onKeyDown ( int keyCode, KeyEvent event) {
@@ -116,6 +150,26 @@ public class Login extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
+    }
+    // bytes转bitmap
+    public Bitmap Bytes2Bimap(byte[] b) {
+        if (b.length != 0) {
+            return BitmapFactory.decodeByteArray(b, 0, b.length);
+        } else {
+            return null;
+        }
+    }
+
+    // bitmap 缩放
+    public static Bitmap zoomBitmap(Bitmap bitmap, int width, int height) {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        Matrix matrix = new Matrix();
+        float scaleWidth = ((float) width / w);
+        float scaleHeight = ((float) height / h);
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
+        return newbmp;
     }
 
 
