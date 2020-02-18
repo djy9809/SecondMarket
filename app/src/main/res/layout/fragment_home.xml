@@ -6,28 +6,9 @@
     tools:context="com.example.djy.secondmarket.Fragment.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/blue">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="主页"
-            android:textSize="20sp"
-            android:textColor="@color/white"/>
-
-        <Button
-            android:id="@+id/button_search"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/search3"
-            android:layout_alignParentRight="true"
-            />
-
-    </RelativeLayout>
+    <include
+        android:id="@+id/titlebar"
+        layout="@layout/titlebar" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

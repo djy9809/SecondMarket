@@ -46,8 +46,8 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     public void onStart() {
         super.onStart();
         initView();
-        Button button_search =getActivity().findViewById(R.id.button_search);
-        button_search.setOnClickListener(new View.OnClickListener() {
+        TextView textView_search = getActivity().findViewById(R.id.search_message_home);
+        textView_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),HomeSearch.class);
