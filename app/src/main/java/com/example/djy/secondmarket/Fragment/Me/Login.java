@@ -1,7 +1,6 @@
 package com.example.djy.secondmarket.Fragment.Me;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -12,30 +11,27 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.load.engine.Resource;
+import com.example.djy.secondmarket.Fragment.Me.mode.LoginBO;
+import com.example.djy.secondmarket.Fragment.Me.mode.LoginUser;
 import com.example.djy.secondmarket.Fragment.Me.mode.RegisterBO;
-import com.example.djy.secondmarket.Fragment.Me.mode.UserBO;
-import com.example.djy.secondmarket.Fragment.MeFragment;
-import com.example.djy.secondmarket.MainActivity;
 import com.example.djy.secondmarket.R;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.UUID;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static com.example.djy.secondmarket.R.layout.login;
 
 public class Login extends AppCompatActivity{
     private EditText et_uname,et_password;
@@ -44,7 +40,7 @@ public class Login extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(login);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -87,16 +83,15 @@ public class Login extends AppCompatActivity{
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                String url ="http://192.168.2.114:8081/Proj20/login";
-                UserBO user = new UserBO();
+                String url ="http://118.89.217.225:8080/Proj20/login";
+                LoginUser user = new LoginUser();
                 String uname = et_uname.getText().toString().trim();//.getText()获取文本，.toString()转成string类型,.trim()去掉前后空白
                 String upassword = et_password.getText().toString().trim();
+                Gson gson = new Gson();
                 user.setOpType("90002");
                 user.setUname(uname);
                 user.setUpassword(upassword);
-                Gson gson = new Gson();
-                String jsonStr = gson.toJson(user,UserBO.class);
-
+                String jsonStr = gson.toJson(user,LoginUser.class);
                 RequestBody requestBody = new FormBody.Builder()
                         .add("reqJson",jsonStr)
                         .build();
@@ -121,10 +116,10 @@ public class Login extends AppCompatActivity{
                                     Toast.makeText(Login.this,s,Toast.LENGTH_SHORT).show();
                                 }
                             });
-
                             Gson gson = new Gson();
-                            RegisterBO bo = new RegisterBO();
-                            Log.i("test", "RegisterBO is :" + bo.toString());
+                            LoginBO loginBO = gson.fromJson(s,LoginBO.class);
+                            LoginBO bo = new LoginBO();
+                            Log.i("test", "LoginBO is :" + loginBO.toString());
                             bo.getFlag();
                             bo.getMessage();
                             bo.getToken();

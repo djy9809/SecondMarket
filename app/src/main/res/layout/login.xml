@@ -85,7 +85,7 @@
             android:background="@drawable/shape_blue_frame"
             android:text="登录"
             android:textColor="@color/white"
-            android:textSize="25sp"></Button>
+            android:textSize="22sp"></Button>
 
         <Button
             android:id="@+id/btn_register"
@@ -96,7 +96,7 @@
             android:background="@drawable/shape_blue_frame"
             android:text="注册"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="22sp"
 
             ></Button>
 

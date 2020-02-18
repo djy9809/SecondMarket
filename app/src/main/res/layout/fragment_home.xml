@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Home"
+            android:text="主页"
             android:textSize="20sp"
             android:textColor="@color/white"/>
 
@@ -43,12 +43,24 @@
     </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/textView1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="1"
-        android:text="————————————recommend————————————"
-        android:gravity="center_horizontal"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="------recommend------"
+            android:gravity="center_horizontal"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView1"
+            android:layout_marginTop="5dp" />
+    </RelativeLayout>
+
+
 
 </LinearLayout>

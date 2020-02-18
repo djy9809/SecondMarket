@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.djy.secondmarket.Fragment.Me.mode.LoginBO;
 import com.example.djy.secondmarket.Fragment.Me.mode.RegisterBO;
 import com.example.djy.secondmarket.Fragment.Me.mode.UserBO;
 import com.example.djy.secondmarket.R;
@@ -58,7 +59,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                String url = "http://192.168.2.114:8081/Proj20/register";
+                String url = "http://118.89.217.225:8080/Proj20/register";
 
                 UserBO user = new UserBO();
                 Resources res = getResources();
@@ -99,18 +100,23 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(Register.this,s,Toast.LENGTH_SHORT).show();
+
+                                    Gson gson = new Gson();
+                                    LoginBO LoginBO = gson.fromJson(s,LoginBO.class);
+                                    LoginBO bo = new LoginBO();
+                                    Log.i("test", "LoginBO is :" + LoginBO.toString());
+                                    bo.getFlag();
+                                    bo.getMessage();
+                                    bo.getToken();
+                                    int flag = bo.getFlag();
+                                    if (flag == 200){
+
+                                        Intent intent_login = new Intent(Register.this,Login.class);
+                                        startActivity(intent_login);
+
+                                    }
                                 }
                             });
-                            Gson gson = new Gson();
-                            RegisterBO bo = gson.fromJson(s,RegisterBO.class);
-
-                            Log.i("test","RegisterBO is:"+bo.toString());
-                            bo.getFlag();
-                            bo.getMessage();
-                            bo.getToken();
-
-                            Intent intent_login = new Intent(Register.this, Login.class);
-                            startActivity(intent_login);
 
                         }
                     }

@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     // private TextView mTextMessage;
     private BottomNavigationView bottomNavigationView;
 
-
     private HomeFragment homeFragment;
     private SortFragment sortFragment;
     private FindFragment findFragment;
